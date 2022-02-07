@@ -13,9 +13,9 @@ public class ProducerApplication {
 
         Properties properties = new Properties();
 
-        String connectionString = "Endpoint=sb://eventhub-viteducode.servicebus.windows.net/;SharedAccessKeyName=eh-producer-policy;SharedAccessKey=<key>";
+        String connectionString = "Endpoint=sb://eh-viteducode.servicebus.windows.net/;SharedAccessKeyName=eh-producer-policy;SharedAccessKey=<key>";
 
-        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "eventhub-viteducode.servicebus.windows.net:9093");
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "eh-viteducode.servicebus.windows.net:9093");
         properties.put("security.protocol", "SASL_SSL");
         properties.put("sasl.mechanism", "PLAIN");
         properties.put("sasl.jaas.config", "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"" + connectionString + "\";");

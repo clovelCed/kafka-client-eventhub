@@ -17,9 +17,9 @@ public class ConsumerApplication {
 
         Properties properties = new Properties();
 
-        String connectionString = "Endpoint=sb://eventhub-viteducode.servicebus.windows.net/;SharedAccessKeyName=eh-consumer-policy;SharedAccessKey=<key>";
+        String connectionString = "Endpoint=sb://eh-viteducode.servicebus.windows.net/;SharedAccessKeyName=eh-consumer-policy;SharedAccessKey=<key>";
 
-        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "eventhub-viteducode.servicebus.windows.net:9093");
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "eh-viteducode.servicebus.windows.net:9093");
         properties.put("security.protocol", "SASL_SSL");
         properties.put("sasl.mechanism", "PLAIN");
         properties.put("sasl.jaas.config", "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"" + connectionString + "\";");
@@ -37,8 +37,7 @@ public class ConsumerApplication {
             while (true) {
                 ConsumerRecords<String, String> records = kafkaConsumer.poll(Duration.ofMillis(100));
                 for (ConsumerRecord<String, String> record : records) {
-                    System.out.printf("Message key : %s - Message value : %s - Message offset : %d - Message partition : %d\n",
-                            record.key(), record.value(), record.offset(), record.partition());
+                    System.out.printf("Message key : %s - Message value : %s", record.key(), record.value());
                 }
                 kafkaConsumer.commitAsync();
             }
