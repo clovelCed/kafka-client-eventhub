@@ -1,0 +1,23 @@
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: eh-viteducode.servicebus.windows.net:9093
+      group-id: app1
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://eh-viteducode.servicebus.windows.net/;SharedAccessKeyName=eh-consumer-policy;SharedAccessKey=<key>";
+        sasl.mechanism: PLAIN
+        security.protocol: SASL_SSL
+    producer:
+      bootstrap-servers: eh-viteducode.servicebus.windows.net:9093
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      properties:
+        sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://eh-viteducode.servicebus.windows.net/;SharedAccessKeyName=eh-producer-policy;SharedAccessKey=<key>";
+        sasl.mechanism: PLAIN
+        security.protocol: SASL_SSL
+
+
+
