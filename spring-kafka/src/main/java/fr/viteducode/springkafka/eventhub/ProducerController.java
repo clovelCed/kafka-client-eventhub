@@ -21,8 +21,14 @@ public class ProducerController {
     }
 
     @GetMapping("/produce/{value}")
-    public ResponseEntity<String> produce(@PathVariable String value) throws ExecutionException, InterruptedException {
-        SendResult<String, String> result = this.kafkaTemplate.send("topic_spring", value).get();
-        return ResponseEntity.ok("Produced on offset : " + result.getRecordMetadata().offset());
+    public ResponseEntity<String> produce(@PathVariable String value) {
+        SendResult<String, String> result;
+        try {
+            result = this.kafkaTemplate.send("topic_spring", value).get();
+            return ResponseEntity.ok("Produced on offset : " + result.getRecordMetadata().offset());
+        } catch (InterruptedException | ExecutionException e) {
+            Thread.currentThread().interrupt();
+        }
+        return ResponseEntity.internalServerError().build();
     }
 }

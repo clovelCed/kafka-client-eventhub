@@ -18,6 +18,3 @@ spring:
         sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://eh-viteducode.servicebus.windows.net/;SharedAccessKeyName=eh-producer-policy;SharedAccessKey=<key>";
         sasl.mechanism: PLAIN
         security.protocol: SASL_SSL
-
-
-
